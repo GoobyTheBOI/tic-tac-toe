@@ -1,11 +1,12 @@
-import Grid from "./components/grid/Grid.component";
+
+import Game from "./components/Game/Game.component";
 
 function TicTacToe() {
 
   const isXNext = true;
 
   return (
-    <Grid player={isXNext} />
+    <Game player={isXNext} />
   );
 }
 
