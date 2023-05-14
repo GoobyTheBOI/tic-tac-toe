@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Block from "../block/Block.component";
 import "./gird.style.css";
+import {postScore} from "../../api/scoreAPI";
 
 function Grid(props) {
   const [board, setBoard] = useState(Array(9).fill(null));
@@ -43,6 +44,7 @@ function Grid(props) {
       console.log(board[a]);
 
       if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+        postScore(board[a], board).then();
         return board[a];
       }
     }
