@@ -4,16 +4,18 @@ import {postScore} from "../../api/scoreAPI";
 
 function Game(props) {
   const [board, setBoard] = useState(Array(9).fill(null));
-  const [isXNext, setIsXNext] = useState(props.player);
+  const [isXNext, setIsXNext] = useState(false);
   const [isGameEnd, setIsGameEnd] = useState(false);
+  const [winningLine, setWinningLine] = useState(null);
+  const [isDraw, setIsDraw] = useState(false);
 
   useEffect(() => {
     async function postData() {
       if (isGameEnd) {
-        return await postScore(calculateWinner(), board);
+        return await postScore((isDraw && 'd') || currentForm(), board);
       }
     }
-    postData().then();
+    postData().catch(error => console.error('Error posting score:', error));
 
   }, [isGameEnd]);
 
@@ -26,7 +28,6 @@ function Game(props) {
 
     squares[block] = currentForm();
     setBoard(squares);
-    setIsXNext(!isXNext);
   }
 
   const currentForm = () => {
@@ -40,6 +41,12 @@ function Game(props) {
   useEffect(() => {
     if (calculateWinner() !== null) {
       setIsGameEnd(true);
+      setWinningLine(calculateWinner());
+    }else if(board.every(block => block !== null)) {
+      setIsGameEnd(true);
+      setIsDraw(true);
+    } else {
+      setIsXNext(!isXNext);
     }
   }, [board]);
 
@@ -59,14 +66,25 @@ function Game(props) {
       const [a, b, c] = winningLines[i];
 
       if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-        return board[a];
+        return winningLines[i];
       }
     }
 
     return null;
   }
+
+  const resetGame = () => {
+    setBoard(Array(9).fill(null));
+    setIsXNext(props.player);
+    setIsGameEnd(false);
+    setWinningLine(null);
+    setIsDraw(false);
+  }
   return (
-    <Grid board={board} handleClick={handleClick} />
+    <>
+      <Grid board={board} winningLine={winningLine} handleClick={handleClick} />
+      <button onClick={() => resetGame()}>Restart Game</button>
+    </>
   );
 }
 

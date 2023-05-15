@@ -32,3 +32,8 @@
     left: 10px;
 }
 
+.winnerBackground {
+    background-color: lightblue;
+    transparent: 0.5;
+}
+

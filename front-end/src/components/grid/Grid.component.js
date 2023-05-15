@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Block from "../block/Block.component";
 import "./gird.style.css";
-import {postScore} from "../../api/scoreAPI";
 
-function Grid({board, handleClick}) {
+function Grid({board, handleClick, winningLine}) {
   const setupBoard = () => {
     return board.map((block, index) => {
-      return <Block key={index} form={board[index]} handleClick={() => handleClick(index)} />
+      const isWinning = winningLine && winningLine.includes(index);
+      return <Block key={index} form={board[index]} winner={isWinning} handleClick={() => handleClick(index)} />
     });
   }
 
