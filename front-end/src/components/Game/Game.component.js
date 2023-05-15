@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Grid from "../grid/Grid.component";
 import {postScore} from "../../api/scoreAPI";
 
-function Game(props) {
+function Game() {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(false);
   const [isGameEnd, setIsGameEnd] = useState(false);
@@ -75,7 +75,7 @@ function Game(props) {
 
   const resetGame = () => {
     setBoard(Array(9).fill(null));
-    setIsXNext(props.player);
+    setIsXNext(false);
     setIsGameEnd(false);
     setWinningLine(null);
     setIsDraw(false);
