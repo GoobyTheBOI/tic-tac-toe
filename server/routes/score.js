@@ -1,5 +1,4 @@
 const router = require('express').Router();
-// const {mysql} = require('../database/database');
 const pool = require('../database/database');
 
 /*
