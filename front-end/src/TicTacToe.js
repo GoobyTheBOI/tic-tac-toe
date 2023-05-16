@@ -1,11 +1,6 @@
 
 import Game from "./components/Game/Game.component";
 
-function TicTacToe() {
-
-  return (
-    <Game />
-  );
-}
+const TicTacToe = () => <Game />;
 
 export default TicTacToe;

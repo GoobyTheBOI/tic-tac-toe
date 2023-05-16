@@ -6,7 +6,14 @@ function Grid({board, handleClick, winningLine}) {
   const setupBoard = () => {
     return board.map((block, index) => {
       const isWinning = winningLine && winningLine.includes(index);
-      return <Block key={index} form={board[index]} winner={isWinning} handleClick={() => handleClick(index)} />
+      return (
+        <Block
+          key={index}
+          form={board[index]}
+          winner={isWinning}
+          handleClick={() => handleClick(index)}
+        />
+      );
     });
   }
 

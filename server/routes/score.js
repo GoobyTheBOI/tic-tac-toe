@@ -7,7 +7,7 @@ const pool = require('../database/database');
  */
 router.post('/score', async (req, res) => {
   const { winner, board } = req.body;
-  const sql = "INSERT INTO scores (winner, board) VALUES (?, ?, ?, ?)";
+  const sql = "INSERT INTO scores (winner, board) VALUES (?, ?)";
   const values = [winner, board.toString()];
   try {
     await pool.execute(sql, values);

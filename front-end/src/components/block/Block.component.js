@@ -1,10 +1,10 @@
 import React from 'react';
 import "./block.style.css";
 
-function Block(props) {
-  const winnerBackground = props.winner && 'winnerBackground';
+function Block({ form, winner, handleClick }) {
+  const winnerBackground = winner && 'winnerBackground';
   return (
-    <div onClick={() => props.handleClick()} className={`block ${props.form} ${winnerBackground}`}></div>
+    <div onClick={() => handleClick()} className={`block ${form} ${winnerBackground}`}></div>
   );
 }
 
